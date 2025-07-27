@@ -23,6 +23,8 @@ class Classifier:
             prior = self.model_prior_dict[target]
             likelihood = self.calculate_likelihood(data_point, target)
             scores[target] = prior * likelihood
+        print(scores)
+        print(max(scores, key=scores.get))
         return max(scores, key=scores.get)
 
     def get_model_accuracy(self):
