@@ -1,6 +1,6 @@
 from starlette.responses import JSONResponse
 from model_io import write_model
-from classifier import Classifier
+from .classifier import Classifier
 from fastapi import FastAPI
 from data_point_example import data_point_example
 

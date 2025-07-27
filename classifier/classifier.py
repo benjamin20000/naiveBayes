@@ -1,6 +1,6 @@
 from model_io import read_model
 
-class classifier:
+class Classifier:
     """naive bayes classifier using a pre-trained model."""
 
     def __init__(self, model):
