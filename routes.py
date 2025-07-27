@@ -1,10 +1,16 @@
 from data_preparation.load_data import LoadData
 from fastapi import FastAPI, HTTPException
+from starlette.responses import JSONResponse
 from core_model.model import Model
 from data_preparation.clean_data import CleanData
 from core_model.testr import Tester
 from type_converters import convert_to_native
 from model_io import write_model
+from core_model.classifier import Classifier
+from data_point_example import data_point_example
+
+
+
 app = FastAPI()
 
 
@@ -24,18 +30,13 @@ def load_model(model_name ="phishing", target_name="class", index_name = "Index"
         raise HTTPException(status_code=500, detail=f"Failed to load model: {str(e)}")
 
 
-
-load_model()
-# @app.get("/")
-# def make_prediction(model = "phishing", data_point = None):
-#     if data_point is None:
-#         data_point = data_point_example  # set default data point
-#     if not os.path.isfile(f"models/{model}_model.json"):
-#         return {"res": f"no {model} model"}
-#     classifier = Classifier(model)
-#     prediction = classifier.calculate_prediction(data_point)
-#     model_accuracy = classifier.get_model_accuracy()
-#     return JSONResponse(content={"model_accuracy": model_accuracy,"prediction":prediction})
-
+@app.get("/")
+def make_prediction(model = "phishing", data_point = None):
+    if data_point is None:
+        data_point = data_point_example  # set default data point
+    classifier = Classifier(model)
+    prediction = classifier.calculate_prediction(data_point)
+    model_accuracy = classifier.get_model_accuracy()
+    return JSONResponse(content={"model_accuracy": model_accuracy,"prediction":prediction})
 
 
