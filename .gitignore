@@ -95,6 +95,8 @@ dmypy.json
 # Pytype
 .pytype/
 
+
+data/
 # Cython debug symbols
 cython_debug/
 

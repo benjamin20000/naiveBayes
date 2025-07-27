@@ -3,10 +3,12 @@ import kagglehub
 from kagglehub import KaggleDatasetAdapter
 import os
 
-class LoadData:
-    # func for loading the local data
+class load_data:
+    """load data from local files or kaggle api."""
+
     @staticmethod
     def load_csv(model_name):
+        """load csv file from local data folder using model name."""
         path = f"data/{model_name}.csv"
         if not os.path.exists(path):
             raise RuntimeError("path does not exist")
@@ -16,10 +18,9 @@ class LoadData:
         except Exception as e:
             raise RuntimeError("file not opening") from e
 
-
     @staticmethod
-    ##func for loading the external data by api
     def load_phishing_data_by_api():
+        """load phishing dataset from kaggle using kagglehub."""
         file_path = "phishing.csv"
         df = kagglehub.load_dataset(
             KaggleDatasetAdapter.PANDAS,
@@ -27,4 +28,3 @@ class LoadData:
             file_path,
         )
         return df
-
