@@ -1,7 +1,9 @@
 import json
 import os
-from  type_converters import convert_to_numpy
+# from  type_converters import convert_to_numpy
 
+
+# reads a model and its score from a json file
 def write_json(path,data):
     with open(path, "w") as f:
         json.dump(data, f, indent=4)
@@ -28,8 +30,7 @@ def read_model(model_name):
     if 'model' not in data or 'score' not in data:
         raise KeyError(f"Missing 'model' or 'score' keys in model file '{path}'.")
 
-    res = data
-    return res['model'], res['score']
+    return data['model'], data['score']
 
 
 

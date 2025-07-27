@@ -15,11 +15,9 @@ class Tester:
         for index, row in tqdm(self.training_df.iterrows(), total=len(self.training_df)):
             data_point = row.drop(self.target_name).to_dict()
             predicted_target = self.classifier.calculate_prediction(data_point)
-            print(f"{predicted_target}, {row[self.target_name]}")
-            if int(predicted_target) == int(row[self.target_name]):
+            if int(predicted_target) == row[self.target_name]:
                 success_count += 1
-        print(success_count)
-        print(total)
+
 
         accuracy = (success_count / total) * 100
         return accuracy
